@@ -1,11 +1,12 @@
-// import "./experience-bar.css";
+import styles from "../styles/components/ExperienceBar.module.css";
+
 export function ExperienceBar( ) {
-    return (<header className="experience-bar">
+    return (<header className={styles.experienceBar}>
         <span>0 xp</span>
         <div>
             <div style={{ width: '60%' }} />
             <span
-                className="current-progress-label"
+                className={styles.currentProgressLabel}
                 style={{ left: '60%' }}
             >320 xp</span>
         </div>
