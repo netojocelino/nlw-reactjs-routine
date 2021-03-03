@@ -18,9 +18,9 @@ export default function Home() {
               <div>
                   <Profile />
                   <CompletedChallenges />
+                  <Countdown />
               </div>
               <div>
-                  <Countdown />
               </div>
           </section>
       </div>
