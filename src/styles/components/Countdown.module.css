@@ -20,6 +20,7 @@
 }
 .countdownContainer > div span {
     flex: 1;
+    min-width: 64px;
 }
 
 .countdownContainer > div span:first-child {
