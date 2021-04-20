@@ -1,0 +1,96 @@
+.overlay {
+    background-color: rgba(242, 243, 243, 0.8);
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.btnContainer {
+    position: relative;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+    flex: 2;
+
+    margin-top: 2.5rem;
+}
+
+.btnContainer button {
+    width: 25%;
+    min-width: 10rem;
+    padding: 0.6rem 1rem;
+
+    font-weight: bold;
+
+    border-radius: 0.2rem;
+    border: 0;
+    background-color: transparent;
+
+    justify-content: space-around;
+}
+
+.btnContainer button:hover {
+    opacity: 0.9;
+} 
+
+.btnContainer button.success {
+    background-color: var(--green);
+}
+
+.btnContainer button.fail {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+
+.container {
+    background-color: var(--white);
+    
+    width: 100%;
+    max-width: 400px;
+    padding: 1.05rem 3rem 2rem 3rem;
+    
+    border-radius: 5px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+    
+    text-align: center;
+
+    position: relative;
+}
+
+.container header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--blue);
+
+    margin-bottom: 2rem;
+}
+
+.container strong {
+    font-size: 2.25rem;
+    color: var(--text);
+
+    margin-top: 0.25rem;
+}
+
+.container > button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+
+    background-color: transparent;
+
+    border: 0;
+
+    font-size: 0;
+}
