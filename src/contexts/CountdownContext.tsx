@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { ChallengesContext } from "./ChallengesContext";
+import { AlertModal } from '../components/AlertModal'; 
 
 interface CountdownContextData {
     minutes: number;
@@ -8,6 +9,7 @@ interface CountdownContextData {
     isActive: boolean;
     startCountdown: () => void;
     resetCountdown: () => void;
+    closeAlertModal: () => void;
 }
 
 interface CountdownProviderProps {
@@ -25,6 +27,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     const [time, setTime] = useState((25 * 60));
     const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
+    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
     const minutes = Math.floor(time/60);
     const seconds = Math.floor(time%60)
@@ -34,7 +37,16 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setIsActive(true);
     }
 
-    function resetCountdown() {
+
+    function closeAlertModal() {
+        setIsAlertModalOpen(false);
+    }
+
+    function resetCountdown(needConfirm = true) {
+        if(needConfirm) {
+            return setIsAlertModalOpen(true);
+        }
+        closeAlertModal();
         clearTimeout(countdownTimeout);
         setIsActive(false);
         setHasFinished(false);
@@ -62,9 +74,20 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
             hasFinished,
             isActive,
             startCountdown,
-            resetCountdown
+            resetCountdown,
+            closeAlertModal
         }}>
             { children }
+
+            { isAlertModalOpen && (
+                <AlertModal
+                    title={`Deseja abandonar ciclo?`}
+                    successCallback={() => (resetCountdown(false))}
+                    failCallback={() => (setIsAlertModalOpen(false))}
+                >
+                    <p>Ao abandonar o ciclo você não receberá um desafio ou ganhará a experiência.</p>
+                </AlertModal>
+            )}
         </CountdownContext.Provider>
     );
 }

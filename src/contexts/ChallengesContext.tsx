@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 
 import challenges from '../../challenges.json';
 import { LevelUpModal } from '../components/LevelUpModal';
-import { AlertModal } from '../components/AlertModal'; 
 
 interface ChallengesProviderProps {
     children: ReactNode;
@@ -29,7 +28,6 @@ interface ChallengesContextData {
     resetChallenge: () => void;
     completeChallenge: () => void;
     closeLevelUpModal: () => void;
-    closeAlertModal: () => void;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -41,7 +39,6 @@ export function ChallengesProvider ({ children, ...props }: ChallengesProviderPr
     const [challengesCompleted, setChallengesCompleted] = useState( props.challengesCompleted ?? 0 );
     const [activeChallenge, setActiveChallenge] = useState(null);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
-    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
     const experienceToNextLevel = Math.pow(
         (level + 1) * 4
@@ -67,10 +64,6 @@ export function ChallengesProvider ({ children, ...props }: ChallengesProviderPr
 
     function closeLevelUpModal() {
         setIsLevelUpModalOpen(false);
-    }
-
-    function closeAlertModal() {
-        setIsAlertModalOpen(false);
     }
 
     function startNewChallenge() {
@@ -126,23 +119,13 @@ export function ChallengesProvider ({ children, ...props }: ChallengesProviderPr
                 startNewChallenge,
                 resetChallenge,
                 completeChallenge,
-                closeLevelUpModal,
-                closeAlertModal
+                closeLevelUpModal
             }}
         >
             { children }
 
 
             { isLevelUpModalOpen && (<LevelUpModal />)}
-            { isAlertModalOpen && (
-                <AlertModal
-                    title={`Hello WOrld, Test`}
-                    successCallback={() => alert('sucesso')}
-                    failCallback={() => alert('falha')}
-                >
-                    <p>This is a nice body, right</p>
-                </AlertModal>
-            )}
         </ChallengesContext.Provider>
     );
 }
